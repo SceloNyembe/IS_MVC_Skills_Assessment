@@ -1,0 +1,72 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<DEV_3.Model._AccountViewModel>
+@{Layout = "~/Views/Shared/PersonDashboard.cshtml";}
+
+<div><h1 class="title text-center">My Accounts</h1></div>
+
+
+<table class="table-condensed" cellpadding="20" cellspacing="20" align="center">
+    <tr>
+        @*<th>
+                @Html.Label("Account code")
+            </th>*@
+        <th>
+            @Html.Label("Account Number")
+        </th>
+        <th>
+            @Html.Label("balance")
+        </th>
+        <th>
+            @Html.Label("Account status")
+        </th>
+        <th>
+            @Html.Label("Action")
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.code)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.account_number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.outstanding_balance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "EditAccount", new { id = item.code }) |
+                @Html.ActionLink("Delete", "DeleteAccount", new { id = item.code }) |
+
+                @if (item.status != "Closed")
+                {
+
+                    <a class="btn btn-primary" href="@Url.Action("AddTransaction", "Transaction", new { id = item.code, methodId = 1  })">Deposit</a>
+                    <a class="btn btn-danger" href="@Url.Action("AddTransaction", "Transaction", new { id = item.code, methodId = 0 })">Withdraw</a>
+                    <a class="btn btn-warning" href="@Url.Action("CloseOpenAccount", "_Account", new { id = item.code, statusId = 0 })">Deactivate</a>
+
+                }
+
+                <a class="btn btn-success" href="@Url.Action("CloseOpenAccount", "_Account", new { id = item.code, statusId = 1 })">Activate</a>
+            </td>
+        </tr>
+    }
+
+</table>
+ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("MyAccountList", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+
+
+
+
+
+

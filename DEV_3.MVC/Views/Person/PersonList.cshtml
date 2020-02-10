@@ -1,0 +1,64 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Model.PersonViewModel>
+
+@{Layout = "~/Views/Shared/_AdminDash.cshtml";}
+
+<div><h1 class="title text-center">Person List</h1></div>
+
+<div>
+
+</div>
+<table class="table-condensed" cellpadding="20" cellspacing="20" align="center">
+    <tr>
+        <th>
+            @Html.Label("Person code")
+        </th>
+        <th>
+            @Html.Label("Firstname")
+        </th>
+        <th>
+            @Html.Label("Lastname")
+        </th>
+        <th>
+            @Html.Label("ID Number")
+        </th>
+        <th>
+            @Html.Label("Action")
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_number)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditPerson", new { id = item.code }) |
+                @*@Html.ActionLink("Details", "Details", new { id = item.code }) |*@
+                @Html.ActionLink("Delete", "DeletePerson", new { id = item.code })
+            </td>
+        </tr>
+    }
+
+</table>
+ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("PersonList", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+
+
+
+
+
+

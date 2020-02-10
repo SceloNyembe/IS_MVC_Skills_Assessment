@@ -1,0 +1,74 @@
+﻿
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<DEV_3.Model.TransactionViewModel>
+@{Layout = "~/Views/Shared/PersonDashboard.cshtml";}
+
+<div><h1 class="title text-center">My Transactions</h1></div>
+
+<div>
+
+
+</div>
+<table class="table-condensed" cellpadding="20" cellspacing="20" align="center">
+    <tr>
+        <th>
+            @Html.Label("Transaction date")
+        </th>
+        <th>
+            @Html.Label("Capture date")
+        </th>
+        <th>
+            @Html.Label("Amount")
+        </th>
+        <th>
+            @Html.Label("Description")
+        </th>
+        <th>
+            @Html.Label("available Balance")
+        </th>
+        <th>
+            @Html.Label("Action")
+        </th>
+
+
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.transaction_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.capture_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.availableBalance)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditTransaction", new { id = item.code }) |
+                @*@Html.ActionLink("Details", "Details", new { id = item.code }) |*@
+                @Html.ActionLink("Delete", "DeleteTransaction", new { id = item.code })
+            </td>
+        </tr>
+    }
+
+</table>
+ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("MyTransactions", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+
+
+
+
+
+
