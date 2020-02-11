@@ -1,63 +1,81 @@
-﻿@using PagedList
-@using PagedList.Mvc
-@model IPagedList<DEV_3.Model.TransactionViewModel>
+﻿
+@model IEnumerable<DEV_3.Model.TransactionViewModel>
 @{Layout = "~/Views/Shared/_AdminDash.cshtml";}
 
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h3 class="m-0 font-weight-bold text-primary">My Transactions</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.transaction_date)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.capture_date)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Account)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.description)
+                        </th>
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.availableBalance)
+                            </th>*@
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
 
-<div><h1 class="title text-center">transactions </h1></div>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.transaction_date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.capture_date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.acc_code)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.description)
+                            </td>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.availableBalance)
+                                </td>*@
+                            <td>
+                                @Html.ActionLink("Edit", "EditTransaction", new { id = item.code }) |
 
-<div>
+                                @Html.ActionLink("Delete", "DeleteTransaction", new { id = item.code })
+                            </td>
+                        </tr>
+                    }
 
+
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-<table class="table-condensed" cellpadding="20" cellspacing="20" align="center">
-    <tr>
-        <th>
-            @Html.Label("description")
-        </th>
-        <th>
-            @Html.Label("transaction date")
-        </th>
-        <th>
-            @Html.Label("capture date")
-        </th>
-        @*<th>
-                @Html.Label("amount")
-            </th>*@
 
-        <th>
-            @Html.Label("Action")
-        </th>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script type="text/javascript">
+    $.noConflict();
 
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.transaction_date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.capture_date)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Amount)
-                </td>*@
-            <td>
-                @Html.ActionLink("Edit", "EditTransaction", new { id = item.code }) |
-                @*@Html.ActionLink("Details", "Details", new { id = item.code }) |*@
-                @Html.ActionLink("Delete", "DeleteTransaction", new { id = item.code })
-            </td>
-        </tr>
-    }
-
-</table>
- Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("PersonList", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
-
+    jQuery(document).ready(function ($) {
+        $('#dataTable').DataTable();
+    });
+</script>
 
 
 

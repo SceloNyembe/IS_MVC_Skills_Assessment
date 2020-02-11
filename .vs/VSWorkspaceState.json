@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\DEV_3.MVC",
+    "\\DEV_3.MVC\\Views",
+    "\\DEV_3.MVC\\Views\\_Account"
   ],
+  "SelectedNode": "\\DEV_3.MVC\\Views\\_Account",
   "PreviewInSolutionExplorer": false
 }

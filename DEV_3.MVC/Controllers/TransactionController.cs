@@ -23,17 +23,15 @@ namespace DEV_3.MVC.Controllers
                 return User.Identity.Name;
             }
         }
-        public ActionResult TransactionList(int? page)
+        public ActionResult TransactionList()
         {
-            int pagenumber = (page ?? 1);
-            return View(TransactionBusiness.GetAllTransaction().ToPagedList(pagenumber, 10));
+          
+            return View(TransactionBusiness.GetAllTransaction().ToList());
 
         }
 
-        public ActionResult MyTransactions(int? page)
+        public ActionResult MyTransactions()
         {
-            int pagenumber = (page ?? 1);
-
             var per = PersonBusiness.GetAllPerson().Where(x => x.Email == getLoggedInUserName).FirstOrDefault();
 
             var acc = AccountBusiness.GetAllAccount().Where(x => x.per_code == per.code).ToList();
@@ -47,7 +45,7 @@ namespace DEV_3.MVC.Controllers
                 }
             }
 
-            return View(myTransactions.ToPagedList(pagenumber, 10));
+            return View(myTransactions.ToList());
 
         }
 

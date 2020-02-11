@@ -34,6 +34,8 @@ namespace DEV_3.Data
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 
+      // public System.Data.Entity.DbSet<DEV_3.Model._AccountViewModel> _AccountViewModel { get; set; }
+
         //public System.Data.Entity.DbSet<DEV_3.Model._AccountViewModel> _AccountViewModel { get; set; }
     }
 }

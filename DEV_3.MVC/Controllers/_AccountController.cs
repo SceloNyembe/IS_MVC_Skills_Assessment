@@ -23,17 +23,22 @@ namespace DEV_3.MVC.Controllers
                return User.Identity.Name; 
             }
         }
-        public ActionResult AccountList(int? page)
+        public ActionResult AccountList()
         {
-            int pagenumber = (page ?? 1);
-            return View(AccountBusiness.GetAllAccount().ToPagedList(pagenumber, 10));
+            
+            return View(AccountBusiness.GetAllAccount().ToList());
 
         }
-        public ActionResult MyAccountList(int? page)
+
+        public ActionResult Acc()
+       { 
+            return View(AccountBusiness.GetAllAccount().ToList());
+        }
+        public ActionResult MyAccountList()
         {
-            int pagenumber = (page ?? 1);
+          
             var per = PersonBusiness.GetAllPerson().Where(x => x.Email == getLoggedInUserName).FirstOrDefault();
-            return View(AccountBusiness.GetAllAccount().Where(x => x.per_code == per.code).ToPagedList(pagenumber, 10));
+            return View(AccountBusiness.GetAllAccount().Where(x => x.per_code == per.code).ToList());
         }
 
         public ActionResult AddAccount()

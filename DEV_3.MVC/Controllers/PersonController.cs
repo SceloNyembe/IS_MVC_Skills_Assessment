@@ -17,29 +17,19 @@ namespace DEV_3.MVC.Controllers
 
         private readonly AccountBusiness AccountBusiness = new AccountBusiness();
 
-        public ActionResult PersonList(int? page)
+        public ActionResult PersonList()
         {
-            int pagenumber = (page ?? 1);
-            return View(personBusiness.GetAllPerson().ToPagedList(pagenumber, 10));
+          
+            return View(personBusiness.GetAllPerson().ToList());
   
         }
 
-        public ActionResult MyAccounts(int? page)
+        public ActionResult MyAccounts()
         {
-            int pagenumber = (page ?? 1);
-           // var loggedInUser = System.Web.HttpContext.Current.User.Identity.Name;
+          
             var loggedInUser = User.Identity.Name;
             var person = personBusiness.GetAllPerson().Where(x => x.Email == loggedInUser);
             
-            //foreach(var y in AccountBusiness.GetAllAccount())
-            //{
-            //    if (y.Person.Email =  person)
-            //    {
-            //        return View(AccountBusiness.GetAllAccount().Where(x => x.Person.Email == loggedInUser).ToList().FirstOrDefault());
-            //    }
-            //}
-
-           // var accounts = AccountBusiness.GetAllAccount().Where(x=>x.Person)
 
 return View(AccountBusiness.GetAllAccount().Where(x => x.Person.Email == loggedInUser).ToList().FirstOrDefault());
 
@@ -71,26 +61,6 @@ return View(AccountBusiness.GetAllAccount().Where(x => x.Person.Email == loggedI
 
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult AddPerson(RegisterViewModel model)
-        //{
-        //    var per = personBusiness.GetAllPerson().Where(x => x.id_number == model.id_number).FirstOrDefault();
-
-        //    if (per == null)
-        //    {
-        //        personBusiness.AddPerson(model);
-        //        return RedirectToAction("PersonList");
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Addper = "User with  ID Number [ " + model.id_number + " ] already exists!";
-        //        return View(model);
-        //    }
-
-
-        //}
-
         [HttpGet]
         public ActionResult EditPerson(int id)
         {
@@ -118,7 +88,7 @@ return View(AccountBusiness.GetAllAccount().Where(x => x.Person.Email == loggedI
         [ValidateAntiForgeryToken]
         public ActionResult DeletePerson(PersonViewModel model, int id)
         {
-            //personBusiness.GetPersonById(id);
+ 
             personBusiness.DeletePerson(id);
 
             Content("Successful");

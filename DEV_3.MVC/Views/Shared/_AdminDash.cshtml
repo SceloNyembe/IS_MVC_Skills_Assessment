@@ -17,6 +17,15 @@
 
     <!-- Custom styles for this template-->
     <link href="~/Content/Templates/Dash/css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Custom styles for this page -->
+    @*<link href="~/Content/Templates/Dash/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" media="all" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>*@
+
+
 
 </head>
 
@@ -41,11 +50,11 @@
 
             <!-- Nav Item - Dashboard -->
             @*<li class="nav-item active">
-                    <a class="nav-link">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>*@
+                <a class="nav-link">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>*@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -65,7 +74,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
                         <a class="collapse-item" @Html.ActionLink("Accounts", "AccountList", "_Account")</a>
-                        <a class="collapse-item" @Html.ActionLink("Create Account", "AddAccount", "_Account") </a>
+                        <a class="collapse-item" @Html.ActionLink("Create Account", "AccountList", "_Account") </a>
                         <a class="collapse-item" @Html.ActionLink("Update Accounts", "AccountList", "_Account") </a>
                         <a class="collapse-item" @Html.ActionLink("Delete Account ", "AccountList", "_Account") </a>
 
@@ -88,7 +97,7 @@
                         <a class="collapse-item" @Html.ActionLink("Transactions list", "TransactionList", "Transaction")</a>
                         <a class="collapse-item" @Html.ActionLink("Update Transactions", "TransactionList", "Transaction")</a>
                         <a class="collapse-item" @Html.ActionLink("Delete Transactions ", "TransactionList", "Transaction")</a>
-                       
+
                     </div>
                 </div>
             </li>
@@ -141,15 +150,15 @@
 
                     <!-- Topbar Search -->
                     @*<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
-                            <i class="fas fa-search fa-sm"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>*@
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>*@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -184,7 +193,7 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
                                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
-                             Dropdown - User Information 
+                             Dropdown - User Information
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -222,10 +231,10 @@
                     @RenderBody()
 
                 </div>
-       
+
                 <!-- End of Main Content -->
                 <!-- Footer -->
-                <footer class="sticky-footer bg-dark" style="position:fixed;bottom:0;width:100%" >
+                <footer class="sticky-footer bg-dark" style="position:fixed;bottom:0;width:100%">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
                             <span>Copyright &copy; </span>
@@ -280,6 +289,14 @@
         <script src="~/Content/Templates/Dash/js/demo/chart-area-demo.js"></script>
         <script src="~/Content/Templates/Dash/js/demo/chart-pie-demo.js"></script>
 
+
+        <!-- Page level plugins -->
+        @*script src="~/Content/Templates/Dash/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/Content/Templates/Dash/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="~/Content/Templates/Dash/js/demo/datatables-demo.js"></script>*@
+     
 
 </body>
 

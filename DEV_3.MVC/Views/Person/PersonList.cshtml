@@ -1,62 +1,135 @@
-﻿@using PagedList
-@using PagedList.Mvc
-@model IPagedList<Model.PersonViewModel>
+﻿
+@model IEnumerable<Model.PersonViewModel>
 
 @{Layout = "~/Views/Shared/_AdminDash.cshtml";}
 
-<div><h1 class="title text-center">Person List</h1></div>
+@*<div><h1 class="title text-center">Person List</h1></div>
 
-<div>
+    <div>
 
-</div>
-<table class="table-condensed" cellpadding="20" cellspacing="20" align="center">
-    <tr>
-        <th>
-            @Html.Label("Person code")
-        </th>
-        <th>
-            @Html.Label("Firstname")
-        </th>
-        <th>
-            @Html.Label("Lastname")
-        </th>
-        <th>
-            @Html.Label("ID Number")
-        </th>
-        <th>
-            @Html.Label("Action")
-        </th>
-
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    </div>
+    <table class="table-condensed" cellpadding="20" cellspacing="20" align="center">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.surname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.id_number)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditPerson", new { id = item.code }) |
-                @*@Html.ActionLink("Details", "Details", new { id = item.code }) |*@
-                @Html.ActionLink("Delete", "DeletePerson", new { id = item.code })
-            </td>
+            <th>
+                @Html.Label("Person code")
+            </th>
+            <th>
+                @Html.Label("Firstname")
+            </th>
+            <th>
+                @Html.Label("Lastname")
+            </th>
+            <th>
+                @Html.Label("ID Number")
+            </th>
+            <th>
+                @Html.Label("Action")
+            </th>
+
+            <th></th>
         </tr>
-    }
 
-</table>
- Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("PersonList", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_number)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditPerson", new { id = item.code }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.code }) |
+                    @Html.ActionLink("Delete", "DeletePerson", new { id = item.code })
+                </td>
+            </tr>
+        }
 
+    </table>*@
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h3 class="m-0 font-weight-bold text-primary">Customers list</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.code)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.surname)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.id_number)
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.surname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.id_number)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Edit", "EditPerson", new { id = item.code }) |
+                            @Html.ActionLink("Delete", "DeletePerson", new { id = item.code })
+                        </td>
+                    </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script type="text/javascript">
+    $.noConflict();
+
+    jQuery(document).ready(function ($) {
+        $('#dataTable').DataTable();
+    });
+</script>
 
 
 
